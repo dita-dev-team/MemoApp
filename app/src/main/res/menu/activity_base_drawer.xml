@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" android:id="@+id/nav_main">
+        <item android:id="@+id/nav_memos" android:icon="@drawable/ic_memo"
+            android:title="Memos" />
+        <item android:id="@+id/nav_connections" android:icon="@drawable/ic_group"
+            android:title="Connections" />
+        <item android:id="@+id/nav_docs" android:icon="@drawable/ic_document"
+            android:title="Documents" />
+    </group>
+
+    <group android:id="@+id/nav_tools" android:checkableBehavior="single">
+        <item android:id="@+id/settings" android:icon="@drawable/ic_settings"
+            android:title="settings"/>
+        <item android:title="help" android:id="@+id/help" android:icon="@drawable/ic_help"/>
+    </group>
+
+</menu>
