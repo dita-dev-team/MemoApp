@@ -13,9 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.dita.dev.memoapp.ProfileActivity;
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class BaseActivity extends AppCompatActivity
@@ -24,7 +28,7 @@ public class BaseActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        super.setContentView(R.layout.activity_base);
 
         if (!PrefSettings.isLoggedIn(getApplicationContext())) {
             Intent intent = new Intent(this, WelcomeActivity.class);
@@ -53,6 +57,15 @@ public class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+
+        CircleImageView profile = (CircleImageView) headerView.findViewById(R.id.profile_image);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            }
+        });
     }
 
     @Override
@@ -93,22 +106,24 @@ public class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        if (id == R.id.nav_memos) {
+            Toast.makeText(BaseActivity.this, "Memo pressed", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_connections) {
+            Toast.makeText(BaseActivity.this, "Connections pressed", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_docs) {
+            Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_settings) {
+            Toast.makeText(BaseActivity.this, "Settings pressed", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_help) {
+            Toast.makeText(BaseActivity.this, "Help pressed", Toast.LENGTH_SHORT).show();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openProfile(View view) {
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 }
