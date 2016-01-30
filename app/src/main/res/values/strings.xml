@@ -9,4 +9,5 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin magna sit amet enim pellentesque, ac imperdiet nibh venenatis. Sed tincidunt fermentum magna, ac hendrerit dolor laoreet eu. Phasellus eu purus augue. Integer placerat imperdiet metus, vitae fermentum metus. Aliquam tristique sem vehicula accumsan auctor. Fusce nisi massa, scelerisque vel rutrum id, porta dignissim ipsum. Duis faucibus dapibus mauris et rhoncus. Sed mattis felis at interdum porttitor. In lectus mi, molestie ac imperdiet quis, dapibus sit amet quam. </string>
 </resources>
