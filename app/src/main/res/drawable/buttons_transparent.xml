@@ -4,7 +4,7 @@
     android:shape="rectangle">
 
     <stroke
-        android:color="@color/body_text_1_inverse"
+        android:color="@android:color/white"
         android:width="1dp"/>
 
     <corners

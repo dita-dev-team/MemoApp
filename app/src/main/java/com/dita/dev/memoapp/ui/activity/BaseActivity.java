@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.dita.dev.memoapp.ProfileActivity;
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
 
@@ -109,7 +108,7 @@ public class BaseActivity extends AppCompatActivity
         if (id == R.id.nav_memos) {
             Toast.makeText(BaseActivity.this, "Memo pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_connections) {
-            Toast.makeText(BaseActivity.this, "Connections pressed", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ConnectionsActivity.class));
         } else if (id == R.id.nav_docs) {
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
