@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
+import com.dita.dev.memoapp.ui.fragment.DocumentFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -110,6 +114,12 @@ public class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_connections) {
             startActivity(new Intent(this, ConnectionsActivity.class));
         } else if (id == R.id.nav_docs) {
+
+            Fragment fragment = new DocumentFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, fragment).addToBackStack(null);
+            transaction.commit();
+
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
             Toast.makeText(BaseActivity.this, "Settings pressed", Toast.LENGTH_SHORT).show();
