@@ -9,12 +9,13 @@ import android.view.View;
 
 import com.dita.dev.memoapp.R;
 
-public class ConnectionsActivity extends AppCompatActivity {
+public class ConnectionsActivity extends BaseActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connections);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
