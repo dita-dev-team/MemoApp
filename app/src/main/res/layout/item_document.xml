@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/documentImage"
+        android:src="@drawable/document_placeholder"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Title"
+        android:id="@+id/documentTitle"
+        android:layout_alignTop="@+id/documentImage"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/documentImage"
+        android:layout_toEndOf="@+id/documentImage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description"
+        android:id="@+id/documentDescription"
+        android:layout_alignLeft="@+id/documentTitle"
+        android:layout_alignStart="@+id/documentTitle"
+        android:layout_alignBottom="@+id/documentImage"
+        android:layout_below="@+id/documentTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:ellipsize="end"
+        android:lines="4" />
+</RelativeLayout>

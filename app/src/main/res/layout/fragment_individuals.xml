@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dita.dev.memoapp.ui.fragment.GroupFragment">
+    tools:context="com.dita.dev.memoapp.ui.fragment.IndividualsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Groups"
+            android:text="Individuals"
             android:id="@+id/individualsTitles"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
