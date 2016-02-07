@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
+import com.dita.dev.memoapp.ui.fragment.ConnectionsFragment;
 import com.dita.dev.memoapp.ui.fragment.DocumentFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -108,15 +109,19 @@ public class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_memos) {
             Toast.makeText(BaseActivity.this, "Memo pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_connections) {
-            startActivity(new Intent(this, ConnectionsActivity.class));
-        } else if (id == R.id.nav_docs) {
+            Fragment fragment = new ConnectionsFragment();
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, fragment).addToBackStack(null);
+            transaction.commit();
 
+            Toast.makeText(BaseActivity.this, "Connections pressed", Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(this, ConnectionsActivity.class));
+        } else if (id == R.id.nav_docs) {
             Fragment fragment = new DocumentFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, fragment).addToBackStack(null);
             transaction.commit();
 
