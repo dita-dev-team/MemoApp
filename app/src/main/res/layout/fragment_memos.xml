@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dita.dev.memoapp.ui.fragment.MemosFragment">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/memos_list"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/memo_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:minHeight="?attr/actionBarSize">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Memo"
+                android:textColor="@color/black"
+                android:layout_weight="8"
+                android:background="@color/transparent"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_camera"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_microphone"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>
