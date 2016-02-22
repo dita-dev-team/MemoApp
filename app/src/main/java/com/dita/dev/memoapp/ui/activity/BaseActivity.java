@@ -22,6 +22,7 @@ import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.ConnectionsFragment;
 import com.dita.dev.memoapp.ui.fragment.DocumentFragment;
+import com.dita.dev.memoapp.ui.fragment.MemosFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -112,17 +113,17 @@ public class BaseActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_memos) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, new MemosFragment()).addToBackStack(null);
+            transaction.commit();
+
             Toast.makeText(BaseActivity.this, "Memo pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_connections) {
-            Fragment fragment = new ConnectionsFragment();
-            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, fragment).addToBackStack(null);
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, new ConnectionsFragment()).addToBackStack(null);
             transaction.commit();
 
             Toast.makeText(BaseActivity.this, "Connections pressed", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(this, ConnectionsActivity.class));
         } else if (id == R.id.nav_docs) {
-            Fragment fragment = new DocumentFragment();
-            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, fragment).addToBackStack(null);
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.base_content, new DocumentFragment()).addToBackStack(null);
             transaction.commit();
 
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
