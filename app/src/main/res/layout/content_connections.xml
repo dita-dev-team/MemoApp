@@ -11,22 +11,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.fragment.ConnectionsFragment"
-    tools:showIn="@layout/fragment_connections"
-    >
+    tools:showIn="@layout/fragment_connections">
 
-    <fragment
-        android:layout_weight="1"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/groupFragment"
-        android:name="com.dita.dev.memoapp.ui.fragment.GroupFragment"
-        tools:layout="@layout/fragment_group" />
-    <fragment
         android:layout_weight="1"
+        android:id="@+id/groupContainer" />
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/individualsFragment"
-        android:name="com.dita.dev.memoapp.ui.fragment.IndividualsFragment"
-        tools:layout="@layout/fragment_individuals"/>
+        android:layout_weight="1"
+        android:id="@+id/individualContainer" />
+
+    <!--  <fragment
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/groupFragment"
+          android:name="com.dita.dev.memoapp.ui.fragment.GroupFragment"
+          tools:layout="@layout/fragment_group" />
+      <fragment
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/individualsFragment"
+          android:name="com.dita.dev.memoapp.ui.fragment.IndividualsFragment"
+          tools:layout="@layout/fragment_individuals"/>-->
 
 </LinearLayout>
