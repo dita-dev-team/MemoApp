@@ -2,9 +2,7 @@ package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +20,7 @@ import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.ConnectionsFragment;
 import com.dita.dev.memoapp.ui.fragment.DocumentFragment;
+import com.dita.dev.memoapp.ui.fragment.MemosFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,14 +43,6 @@ public class BaseActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -112,6 +103,8 @@ public class BaseActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_memos) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.base_content, new MemosFragment()).addToBackStack(null);
+            transaction.commit();
             Toast.makeText(BaseActivity.this, "Memo pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_connections) {
             Fragment fragment = new ConnectionsFragment();

@@ -14,19 +14,18 @@
     tools:showIn="@layout/fragment_connections"
     >
 
-    <fragment
-        android:layout_weight="1"
+    <FrameLayout
+        android:id="@+id/groupContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/groupFragment"
-        android:name="com.dita.dev.memoapp.ui.fragment.GroupFragment"
-        tools:layout="@layout/fragment_group" />
-    <fragment
-        android:layout_weight="1"
+        android:layout_weight="1" />
+
+
+    <FrameLayout
+        android:id="@+id/individualsContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/individualsFragment"
-        android:name="com.dita.dev.memoapp.ui.fragment.IndividualsFragment"
-        tools:layout="@layout/fragment_individuals"/>
+        android:layout_weight="1" />
+
 
 </LinearLayout>
