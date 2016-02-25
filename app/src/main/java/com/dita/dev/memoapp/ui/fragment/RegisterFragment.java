@@ -18,14 +18,14 @@ import com.dita.dev.memoapp.bus.SignUpEvent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends BaseFragment {
-    @Bind(R.id.signup_id_no)
-    EditText signup_id;
+
     @Bind(R.id.signup_username)
     EditText signup_name;
     @Bind(R.id.signup_pass)
@@ -35,8 +35,8 @@ public class RegisterFragment extends BaseFragment {
     SignUpEvent signUpEvent;
     private String passwd1;
     private String passwd;
-    private String id;
-    private String name;
+    private String username;
+    private String userType;
 
 
     public RegisterFragment() {
@@ -78,21 +78,26 @@ public class RegisterFragment extends BaseFragment {
         return false;
     }
 
-    private void login() {
-        id = signup_id.getText().toString().trim();
-        name = signup_name.getText().toString().trim();
+    @OnClick(R.id.sign_up_button)
+    public void register(View view) {
+        username = signup_name.getText().toString();
         passwd = signup_pass.getText().toString().trim();
         passwd1 = signup_pass1.getText().toString().trim();
-        signUpEvent = new SignUpEvent(name, id, passwd);
-        EventBus.getDefault().post(signUpEvent);
-        /*
-        if (passwd == passwd1){
-            signUpEvent = new SignUpEvent(name,id,passwd);
+        if (passwd.equals(passwd1)) {
+            signUpEvent = new SignUpEvent(username, passwd, "individual");
             EventBus.getDefault().post(signUpEvent);
-        }
-        else {
+        } else {
             signup_pass1.setError("Password not similar");
         }
-        */
+
+    }
+
+    private void login() {
+
+        userType = signup_name.getText().toString().trim();
+        passwd = signup_pass.getText().toString().trim();
+        signUpEvent = new SignUpEvent(userType, username, passwd);
+        EventBus.getDefault().post(signUpEvent);
+
     }
 }

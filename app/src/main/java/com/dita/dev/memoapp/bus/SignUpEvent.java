@@ -5,12 +5,12 @@ package com.dita.dev.memoapp.bus;
  */
 public class SignUpEvent {
     public String name;
-    public String ID;
+    public String userType;
     public String passwd;
 
-    public SignUpEvent(String name, String ID, String passwd) {
+    public SignUpEvent(String name, String passwd, String userType) {
         this.name = name;
-        this.ID = ID;
+        this.userType = userType;
         this.passwd = passwd;
     }
 
@@ -18,7 +18,7 @@ public class SignUpEvent {
     public String toString() {
         return "SignUpEvent{" +
                 "name='" + name + '\'' +
-                ", ID='" + ID + '\'' +
+                ", userType='" + userType + '\'' +
                 ", passwd='" + passwd + '\'' +
                 '}';
     }

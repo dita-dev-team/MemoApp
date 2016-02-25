@@ -25,20 +25,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/signup_id_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="ID. Number"
-                android:imeOptions="actionNext"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/view3"

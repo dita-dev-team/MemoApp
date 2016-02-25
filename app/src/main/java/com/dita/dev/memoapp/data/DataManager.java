@@ -19,6 +19,7 @@ import retrofit2.Response;
  * Created by marvel on 9/30/15.
  */
 public class DataManager {
+    static final String TAG = DataManager.class.getName();
     RemoteHelper remoteHelper;
 
     public DataManager() {
@@ -50,28 +51,21 @@ public class DataManager {
         });
     }
 
-    public void createUser(String id, String passwd, String name) {
-        Call<Message> messageCall = remoteHelper.getMemoApi().individualCreate(id, passwd, name);
-        messageCall.enqueue(new Callback<Message>() {
+    public void createUser(String username, String passwd, String userType) {
+        Call<Message> userCreate = remoteHelper.getMemoApi().userCreate(username, passwd, userType);
+        userCreate.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Response<Message> response) {
                 if (response.isSuccess()) {
-                    // request successful (status code 200, 201)
-                    Log.i("Retrofit Success: ", String.valueOf(response.code()));
-                    EventBus.getDefault().post(new LoginSucces());
+                    Log.i(TAG, "Success:" + response.toString());
                 } else {
-                    //request not successful (like 400,401,403 etc)
-                    //Handle errors
-                    Log.i("Retrofit Error: ", String.valueOf(response.code()));
-                    //EventBus.getDefault().post(new LoginFail());
-                    //Log.i("Retrofit: ", result.message);
+                    Log.i(TAG, "Success:" + response.toString());
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.i("Retrofit Error: ", String.valueOf(t.getMessage()));
-                EventBus.getDefault().post(new LoginFail());
+                Log.i(TAG, t.toString());
             }
         });
     }
