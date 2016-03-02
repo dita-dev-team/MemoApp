@@ -35,15 +35,24 @@ public class WelcomeActivity extends AppCompatActivity {
     private DataManager dataManager;
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
-        Fragment welcome = new WelcomeActivityFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, welcome).commit();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+        if (fragment == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment, new WelcomeActivityFragment()).commit();
+        }
+
         refreshLayout.setColorSchemeColors(R.color.black);
 
         dataManager = new DataManager();

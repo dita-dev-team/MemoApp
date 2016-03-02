@@ -13,11 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-//import com.mkaya.nathan.memoapp.utils.EmptyOutput;
 
-/**
- * Created by marvel on 9/30/15.
- */
 public class DataManager {
     RemoteHelper remoteHelper;
 
@@ -50,8 +46,8 @@ public class DataManager {
         });
     }
 
-    public void createUser(String id, String passwd, String name) {
-        Call<Message> messageCall = remoteHelper.getMemoApi().individualCreate(id, passwd, name);
+    public void createUser(String username, String passwd, String userType) {
+        Call<Message> messageCall = remoteHelper.getMemoApi().userCreate(username, passwd, userType);
         messageCall.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Response<Message> response) {

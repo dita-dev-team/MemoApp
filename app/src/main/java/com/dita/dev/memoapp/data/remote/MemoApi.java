@@ -15,9 +15,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 
-/**
- * Created by marvel on 9/30/15.
- */
+
 public interface MemoApi {
 
     /**
@@ -43,9 +41,18 @@ public interface MemoApi {
          POST (username-R,password-R)
      */
 
-    String BASE_URL = "http://dita.dev.ngrok.io/api/";
-    String BASE_URL_LOCAL = "192.168.7.74:5050/api/";
+    String BASE_URL = "http://dita.dev.ngrok.io/api/v1/";
+    String BASE_URL_LOCAL = "192.168.7.74:5050/api/v1/";
     String BASIC_AUTH = Credentials.basic("mobile", "mobile");
+
+    /**
+     * User API
+     */
+    String USER_CREATE = "users/";
+    String USER_DELETE = "users/{username}";
+    String USER_UPDATE = "users/{username}";
+    String USER_AUTH = "users/authenticate/";
+
 
     /**
      *  Individual API
@@ -73,8 +80,8 @@ public interface MemoApi {
     Call<Message> individualAuth(@Part("username") String username, @Part("password") String password);
 
     @Multipart
-    @POST(INDIVIDUAL_CREATE)
-    Call<Message> individualCreate(@Part("id_no") String id_no, @Part("password") String passwd, @Part("name") String name);
+    @POST(USER_CREATE)
+    Call<Message> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("user_type") String userType);
 
     @GET(INDIVIDUAL_DETAILS)
     Call<Message> individualDetails(@Path("id") String id_no);

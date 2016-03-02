@@ -30,8 +30,7 @@
             android:id="@+id/individualsExpand"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            style="@style/ButtonsLight" />
+            android:layout_alignParentEnd="true" />
 
         <View
             style="@style/horizontal_divider"

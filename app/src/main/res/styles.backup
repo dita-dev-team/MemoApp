@@ -6,12 +6,9 @@
         <item name="colorPrimary">@color/theme_primary</item>
         <item name="colorPrimaryDark">@color/theme_dark_primary</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="colorControlNormal">@android:color/white</item>
-        <item name="buttonStyle">@style/ButtonDark</item>
+        <item name="buttonStyle">@style/ButtonsDark</item>
         <item name="editTextStyle">@style/EditTextDark</item>
-        <item name="android:textColorHint">@android:color/white</item>
-        <item name="android:spinnerItemStyle">@style/SpinnerItemDark</item>
-
+        <item name="spinnerStyle">@style/SpinnerDark</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,20 +20,43 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ButtonDark" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_dark</item>
-        <item name="android:textColor">@drawable/button_text_color_light</item>
+    <style name="ButtonsDark" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_states_dark</item>
+        <item name="android:textColor">@color/body_text_1_inverse</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginLeft">5dp</item>
 
     </style>
 
-    <style name="EditTextDark" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@android:color/white</item>
+    <style name="ButtonsLight" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_states_light</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+
     </style>
 
-    <style name="SpinnerItemDark" parent="Widget.AppCompat.TextView.SpinnerItem">
+    <style name="ButtonsTransparent" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_states_light</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+
+    </style>
+
+    <!-- EditText -->
+    <style name="EditTextDark" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+    </style>
+
+
+    <!-- Spinner -->
+    <style name="SpinnerDark" parent="Widget.AppCompat.Spinner">
         <item name="android:textColor">@android:color/white</item>
     </style>
 
