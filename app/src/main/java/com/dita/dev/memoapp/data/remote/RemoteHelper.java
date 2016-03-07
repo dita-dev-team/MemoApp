@@ -16,7 +16,7 @@ import retrofit2.RxJavaCallAdapterFactory;
 
 
 /**
- * Created by marvel on 9/30/15.
+ * Created by Wamatu on 9/30/15.
  */
 public class RemoteHelper {
     MemoApi memoApi;
@@ -25,7 +25,7 @@ public class RemoteHelper {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client
                 .addNetworkInterceptor(new StethoInterceptor())
-                .addInterceptor(/*new Interceptor() {
+                .addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
@@ -42,7 +42,7 @@ public class RemoteHelper {
 
                 return response;
             }
-        }*/new CurlLoggingInterceptor());
+                }/*new CurlLoggingInterceptor()*/);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(MemoApi.BASE_URL)

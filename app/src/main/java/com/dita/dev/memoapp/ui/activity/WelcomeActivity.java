@@ -2,7 +2,6 @@ package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -58,11 +57,12 @@ public class WelcomeActivity extends AppCompatActivity {
         dataManager = new DataManager();
     }
 
+    //CREATING A NEW USER
     @Subscribe
     public void onEvent(SignUpEvent event) {
         Log.d("Signup: ", event.toString());
-        //dataManager.createUser(event.ID,event.passwd,event.name);
-        refreshLayout.setRefreshing(true);
+        dataManager.createUser(event.name, event.passwd, event.userType);
+        //refreshLayout.setRefreshing(true);
     }
 
     @Subscribe

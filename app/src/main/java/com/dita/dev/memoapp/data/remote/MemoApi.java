@@ -44,6 +44,7 @@ public interface MemoApi {
     String BASE_URL = "http://dita.dev.ngrok.io/api/v1/";
     String BASE_URL_LOCAL = "192.168.7.74:5050/api/v1/";
     String BASIC_AUTH = Credentials.basic("mobile", "mobile");
+    String USER_CREATE = "users";
 
     /**
      * User API
