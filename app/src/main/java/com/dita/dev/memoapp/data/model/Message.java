@@ -1,28 +1,41 @@
 package com.dita.dev.memoapp.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import javax.annotation.Generated;
 
-/**
- * Created by marvel on 9/30/15.
- */
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+        "message"
+})
 public class Message {
 
-    @SerializedName("message")
-    @Expose
-    public String message;
+    @JsonProperty("message")
+    private String message;
 
-    @SerializedName("Error")
-    @Expose
-    public String Error;
+    /**
+     * @return The message
+     */
+    @JsonProperty("message")
+    public String getMessage() {
+        return message;
+    }
 
-    @SerializedName("image")
-    @Expose
-    private String image;
-    @SerializedName("id_no")
-    @Expose
-    private String idNo;
-    @SerializedName("name")
-    @Expose
-    private String name;
+    /**
+     * @param message The message
+     */
+    @JsonProperty("message")
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "message='" + message + '\'' +
+                '}';
+    }
 }

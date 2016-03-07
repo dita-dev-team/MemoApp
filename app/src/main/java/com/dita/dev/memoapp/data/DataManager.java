@@ -2,72 +2,44 @@ package com.dita.dev.memoapp.data;
 
 import android.util.Log;
 
-import com.dita.dev.memoapp.bus.LoginFail;
-import com.dita.dev.memoapp.bus.LoginSucces;
 import com.dita.dev.memoapp.data.model.Message;
-import com.dita.dev.memoapp.data.remote.RemoteHelper;
+import com.dita.dev.memoapp.data.remote.RemoteClient;
 
-import de.greenrobot.event.EventBus;
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
 public class DataManager {
-    RemoteHelper remoteHelper;
+    static final String TAG = DataManager.class.getName();
+    RemoteClient remoteClient;
 
     public DataManager() {
-        remoteHelper = new RemoteHelper();
+        remoteClient = new RemoteClient();
     }
 
-    public void individualAuth(String id, String passwd) {
-        Call<Message> messageCall = remoteHelper.getMemoApi().individualAuth(/*MemoApi.BASIC_AUTH,*/id, passwd);
-        messageCall.enqueue(new Callback<Message>() {
+
+    public void createUser(String username, String passwd, String userType, String email) {
+        Call<Message> userCreate = remoteClient.getEndpoints().userCreate(username, passwd, userType, email);
+        userCreate.enqueue(new Callback<Message>() {
             @Override
-            public void onResponse(Response<Message> response) {
+            public void onResponse(Call<Message> call, Response<Message> response) {
                 if (response.isSuccess()) {
-                    // request successful (status code 200, 201)
-                    Log.i("Retrofit Success: ", String.valueOf(response.code()));
-                    EventBus.getDefault().post(new LoginSucces());
+                    Log.i(TAG, "Success " + response.body());
                 } else {
-                    //request not successful (like 400,401,403 etc)
-                    //Handle errors
-                    Log.i("Retrofit Error: ", String.valueOf(response.code()));
-                    EventBus.getDefault().post(new LoginFail());
-                    //Log.i("Retrofit: ", result.message);
+                    try {
+                        Log.i(TAG, response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                Log.i("Retrofit: ", t.getMessage());
-            }
-        });
-    }
-
-    public void createUser(String username, String passwd, String userType) {
-        Call<Message> messageCall = remoteHelper.getMemoApi().userCreate(username, passwd, userType);
-        messageCall.enqueue(new Callback<Message>() {
-            @Override
-            public void onResponse(Response<Message> response) {
-                if (response.isSuccess()) {
-                    // request successful (status code 200, 201)
-                    Log.i("Retrofit Success: ", String.valueOf(response.code()));
-                    EventBus.getDefault().post(new LoginSucces());
-                } else {
-                    //request not successful (like 400,401,403 etc)
-                    //Handle errors
-                    Log.i("Retrofit Error: ", String.valueOf(response.code()));
-                    //EventBus.getDefault().post(new LoginFail());
-                    //Log.i("Retrofit: ", result.message);
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.i("Retrofit Error: ", String.valueOf(t.getMessage()));
-                EventBus.getDefault().post(new LoginFail());
+            public void onFailure(Call<Message> call, Throwable t) {
+                Log.e(TAG, Log.getStackTraceString(t));
             }
         });
     }

@@ -15,8 +15,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 
-
-public interface MemoApi {
+public interface MemoApiEndpoints {
 
     /**
 
@@ -44,7 +43,6 @@ public interface MemoApi {
     String BASE_URL = "http://dita.dev.ngrok.io/api/v1/";
     String BASE_URL_LOCAL = "192.168.7.74:5050/api/v1/";
     String BASIC_AUTH = Credentials.basic("mobile", "mobile");
-    String USER_CREATE = "users";
 
     /**
      * User API
@@ -82,7 +80,7 @@ public interface MemoApi {
 
     @Multipart
     @POST(USER_CREATE)
-    Call<Message> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("user_type") String userType);
+    Call<Message> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("type") String userType, @Part("email") String email);
 
     @GET(INDIVIDUAL_DETAILS)
     Call<Message> individualDetails(@Path("id") String id_no);

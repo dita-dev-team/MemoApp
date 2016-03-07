@@ -61,15 +61,13 @@ public class WelcomeActivity extends AppCompatActivity {
     @Subscribe
     public void onEvent(SignUpEvent event) {
         Log.d("Signup: ", event.toString());
-        dataManager.createUser(event.name, event.passwd, event.userType);
+        dataManager.createUser(event.username, event.passwd, event.userType, "default@gmail.com");
         //refreshLayout.setRefreshing(true);
     }
 
     @Subscribe
     public void onEvent(SignInEvent event) {
-        dataManager.individualAuth(event.id, event.passwd);
-        Toast.makeText(WelcomeActivity.this, event.toString(), Toast.LENGTH_SHORT).show();
-        refreshLayout.setRefreshing(true);
+        //refreshLayout.setRefreshing(true);
     }
 
     @Subscribe
@@ -106,16 +104,6 @@ public class WelcomeActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment, login).addToBackStack(null).commit();
         //dataManager.RxtryAuth();
         //dataManager.individualAuth();
-    }
-
-    public void trylog(Message message){
-        try {
-            if (message.message!=null){
-                Log.i("Message: ", message.toString());
-            }
-        }finally {
-            Log.i("Message: ", message.Error);
-        }
     }
 
     @Override

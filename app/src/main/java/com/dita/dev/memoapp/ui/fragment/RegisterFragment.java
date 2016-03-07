@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dita.dev.memoapp.R;
@@ -19,17 +20,22 @@ import com.dita.dev.memoapp.bus.SignUpEvent;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends BaseFragment {
+
     @Bind(R.id.signup_username)
-    EditText signup_username;
+    EditText usernameEditText;
     @Bind(R.id.signup_pass)
-    EditText signup_pass;
+    EditText passEditText;
     @Bind(R.id.signup_pass1)
-    EditText signup_pass1;
+    EditText pass1EditText;
+    @Bind(R.id.user_type)
+    Spinner userTypeSpinner;
+
     SignUpEvent signUpEvent;
     private String passwd1;
     private String passwd;
@@ -48,8 +54,8 @@ public class RegisterFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, view);
-        //signup_pass.setOnEditorActionListener(this);
-        signup_pass1.setOnEditorActionListener(this);
+        //passEditText.setOnEditorActionListener(this);
+        pass1EditText.setOnEditorActionListener(this);
         return view;
     }
 
@@ -58,7 +64,7 @@ public class RegisterFragment extends BaseFragment {
         if (i == EditorInfo.IME_ACTION_DONE) {
             InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-            //login();
+            login();
             return true;
         }
         /*
@@ -78,23 +84,26 @@ public class RegisterFragment extends BaseFragment {
 
     @OnClick(R.id.register_button)
     public void register(View view) {
+        username = usernameEditText.getText().toString();
+        passwd = passEditText.getText().toString().trim();
+        passwd1 = pass1EditText.getText().toString().trim();
+        userType = userTypeSpinner.getSelectedItem().toString().toLowerCase();
+        if (passwd.equals(passwd1)) {
+            signUpEvent = new SignUpEvent(username, passwd, userType);
+            EventBus.getDefault().post(signUpEvent);
+        } else {
+            pass1EditText.setError("Password not similar");
+        }
+
 
     }
 
-    /*private void login() {
-        username = signup_username.getText().toString().trim();
-        passwd = signup_pass.getText().toString().trim();
-        passwd1 = signup_pass1.getText().toString().trim();
-        signUpEvent = new SignUpEvent(name, id, passwd);
+    private void login() {
+
+        userType = usernameEditText.getText().toString().trim();
+        passwd = passEditText.getText().toString().trim();
+        signUpEvent = new SignUpEvent(userType, username, passwd);
         EventBus.getDefault().post(signUpEvent);
-        /*
-        if (passwd == passwd1){
-            signUpEvent = new SignUpEvent(name,id,passwd);
-            EventBus.getDefault().post(signUpEvent);
-        }
-        else {
-            signup_pass1.setError("Password not similar");
-        }
-        *
-    }*/
+
+    }
 }

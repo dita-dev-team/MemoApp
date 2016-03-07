@@ -60,7 +60,7 @@ public class CurlLoggingInterceptor implements Interceptor {
 
         Request request = original.newBuilder()
                 .header("Accept", "application/json")
-                .header("Authorization", MemoApi.BASIC_AUTH)
+                .header("Authorization", MemoApiEndpoints.BASIC_AUTH)
                 .build();
 
         boolean compressed = false;
