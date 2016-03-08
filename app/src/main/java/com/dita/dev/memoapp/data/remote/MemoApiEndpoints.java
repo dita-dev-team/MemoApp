@@ -1,5 +1,6 @@
 package com.dita.dev.memoapp.data.remote;
 
+import com.dita.dev.memoapp.data.model.MemoResponse;
 import com.dita.dev.memoapp.data.model.Message;
 
 import okhttp3.Credentials;
@@ -76,11 +77,11 @@ public interface MemoApiEndpoints {
 
     @Multipart
     @POST(INDIVIDUAL_AUTH)
-    Call<Message> individualAuth(@Part("username") String username, @Part("password") String password);
+    Call<MemoResponse> individualAuth(@Part("username") String username, @Part("password") String password);
 
     @Multipart
     @POST(USER_CREATE)
-    Call<Message> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("type") String userType, @Part("email") String email);
+    Call<MemoResponse> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("type") String userType, @Part("email") String email);
 
     @GET(INDIVIDUAL_DETAILS)
     Call<Message> individualDetails(@Path("id") String id_no);

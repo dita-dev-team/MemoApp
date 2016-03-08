@@ -51,7 +51,7 @@ public class MemoTests {
         response = client.newCall(request).execute();
         memoResponse = mapper.readValue(response.body().string(), MemoResponse.class);
         UserData data = (UserData) memoResponse.data.data;
-        assertEquals(2, data.count.intValue());
+        assertEquals(3, data.count.intValue());
     }
 
     @Test
@@ -71,5 +71,21 @@ public class MemoTests {
         Response response = client.newCall(request).execute();
         memoResponse = mapper.readValue(response.body().string(), MemoResponse.class);
         assertNotNull(memoResponse.message);
+
+        body = new FormBody.Builder()
+                .add("username", "default")
+                .add("password", "default")
+                .add("type", "individual")
+                .add("email", "default@gmail.com")
+                .build();
+
+        request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        response = client.newCall(request).execute();
+        memoResponse = mapper.readValue(response.body().string(), MemoResponse.class);
+        assertNotNull(memoResponse);
     }
 }

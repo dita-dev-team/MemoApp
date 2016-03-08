@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dita.dev.memoapp.R;
-import com.dita.dev.memoapp.bus.LoginSucces;
+import com.dita.dev.memoapp.bus.RegisterStatus;
 import com.dita.dev.memoapp.bus.SignInEvent;
 
 import butterknife.Bind;
@@ -74,7 +74,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void login() {
-        EventBus.getDefault().post(new LoginSucces());
+        EventBus.getDefault().post(new RegisterStatus());
         //EventBus.getDefault().post(signInEvent);
 
     }

@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dita.dev.memoapp.R;
-import com.dita.dev.memoapp.bus.SignUpEvent;
+import com.dita.dev.memoapp.bus.RegisterEvent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,7 +36,7 @@ public class RegisterFragment extends BaseFragment {
     @Bind(R.id.user_type)
     Spinner userTypeSpinner;
 
-    SignUpEvent signUpEvent;
+    RegisterEvent registerEvent;
     private String passwd1;
     private String passwd;
     private String username;
@@ -87,10 +87,10 @@ public class RegisterFragment extends BaseFragment {
         username = usernameEditText.getText().toString();
         passwd = passEditText.getText().toString().trim();
         passwd1 = pass1EditText.getText().toString().trim();
-        userType = userTypeSpinner.getSelectedItem().toString().toLowerCase();
+        userType = userTypeSpinner.getSelectedItem().toString().trim().toLowerCase();
         if (passwd.equals(passwd1)) {
-            signUpEvent = new SignUpEvent(username, passwd, userType);
-            EventBus.getDefault().post(signUpEvent);
+            registerEvent = new RegisterEvent(username, passwd, userType);
+            EventBus.getDefault().post(registerEvent);
         } else {
             pass1EditText.setError("Password not similar");
         }
@@ -102,8 +102,8 @@ public class RegisterFragment extends BaseFragment {
 
         userType = usernameEditText.getText().toString().trim();
         passwd = passEditText.getText().toString().trim();
-        signUpEvent = new SignUpEvent(userType, username, passwd);
-        EventBus.getDefault().post(signUpEvent);
+        registerEvent = new RegisterEvent(userType, username, passwd);
+        EventBus.getDefault().post(registerEvent);
 
     }
 }

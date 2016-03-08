@@ -20,7 +20,6 @@ public class MemoDeserializer extends JsonDeserializer<MemoResponse> {
     public MemoResponse deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         MemoResponse response = new MemoResponse();
         JsonNode node = p.getCodec().readTree(p);
-
         if (node.get("error") != null) {
             response.error = new ObjectMapper().readValue(node.toString(), Error.class);
         } else if (node.get("message") != null) {

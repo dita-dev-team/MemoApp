@@ -51,6 +51,7 @@ public class RemoteClient {
                 .client(client.build())
                 .build();
 
+
         endpoints = retrofit.create(MemoApiEndpoints.class);
     }
 
