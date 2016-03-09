@@ -1,6 +1,10 @@
 package com.dita.dev.memoapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,6 +18,7 @@ import com.dita.dev.memoapp.bus.SignInStatus;
 import com.dita.dev.memoapp.bus.RegisterStatus;
 import com.dita.dev.memoapp.bus.SignInEvent;
 import com.dita.dev.memoapp.data.DataManager;
+import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.LoginFragment;
 import com.dita.dev.memoapp.ui.fragment.RegisterFragment;
 import com.dita.dev.memoapp.ui.fragment.WelcomeActivityFragment;
@@ -28,6 +33,8 @@ public class WelcomeActivity extends AppCompatActivity {
     static final String TAG = WelcomeActivity.class.getName();
     @Bind(R.id.sync_result)
     SwipeRefreshLayout refreshLayout;
+    @Bind(R.id.coordinator)
+    CoordinatorLayout coordinatorLayout;
     private DataManager dataManager;
 
     @Override
@@ -65,33 +72,49 @@ public class WelcomeActivity extends AppCompatActivity {
     // Sign in a user
     @Subscribe
     public void onEvent(SignInEvent event) {
-        //refreshLayout.setRefreshing(true);
+        refreshLayout.setRefreshing(true);
+        dataManager.authUser(event.username, event.passwd);
+
     }
 
     @Subscribe
     public void onEvent(RegisterStatus event) {
-        Log.d(TAG, event.message);
+        if (event.success) {
+            Fragment login = new LoginFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment, login).addToBackStack(null).commit();
+        } else {
+            Snackbar.make(coordinatorLayout, event.message, Snackbar.LENGTH_INDEFINITE).show();
+        }
+        refreshLayout.setRefreshing(false);
     }
 
-    /*@Subscribe
-    public void onEvent(SignInStatus loginSucces) {
-        PrefSettings.markLoggedIn(getApplicationContext(), true);
-        startActivity(new Intent(getApplicationContext(), BaseActivity.class));
-        *//*new Handler().postDelayed(new Runnable() {
+    @Subscribe
+    public void onEvent(SignInStatus eventSuccess) {
+        if (eventSuccess.success) {
+            PrefSettings.markLoggedIn(getApplicationContext(), eventSuccess.success);
+            startActivity(new Intent(getApplicationContext(), BaseActivity.class));
+
+        } else {
+            Snackbar.make(coordinatorLayout, eventSuccess.message, Snackbar.LENGTH_INDEFINITE).show();
+        }
+        refreshLayout.setRefreshing(false);
+
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 refreshLayout.setRefreshing(false);
                 startActivity(new Intent(getApplicationContext(), BaseActivity.class));
             }
-        }, 5000);*//*
+        }, 5000);*/
 
     }
-*/
-    @Subscribe
-    public void onEvent(SignInStatus loginFail) {
-        refreshLayout.setRefreshing(false);
-    }
 
+    /* @Subscribe
+     public void onEvent(SignInStatus loginFail) {
+         refreshLayout.setRefreshing(false);
+     }
+ */
     public void register(View view) {
         // startActivity(new Intent(this, SignupActivity.class));
         Fragment register = new RegisterFragment();

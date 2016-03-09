@@ -55,49 +55,15 @@ public interface MemoApiEndpoints {
 
 
     /**
-     *  Individual API
-     */
-    String INDIVIDUAL_AUTH = "individuals/authenticate/";
-    String INDIVIDUAL_DETAILS = "individuals/{id_no}";
-    String INDIVIDUAL_CREATE = "individuals/";
-    String INDIVIDUAL_DELETE = "individuals/{id_no}";
-    String INDIVIDUAL_UPDATE = "individuals/{id_no}";
-
-    /**
-     *  Group API
-     */
-    String GROUP_AUTH = "groups/authenticate/";
-
-
-
-
-    /**
      * Retrofit Callbacks
      */
 
     @Multipart
-    @POST(INDIVIDUAL_AUTH)
-    Call<MemoResponse> individualAuth(@Part("username") String username, @Part("password") String password);
+    @POST(USER_AUTH)
+    Call<MemoResponse> authUser(@Part("username") String username, @Part("password") String password);
 
     @Multipart
     @POST(USER_CREATE)
     Call<MemoResponse> userCreate(@Part("username") String username, @Part("password") String passwd, @Part("type") String userType, @Part("email") String email);
-
-    @GET(INDIVIDUAL_DETAILS)
-    Call<Message> individualDetails(@Path("id") String id_no);
-
-    @DELETE(INDIVIDUAL_DELETE)
-    Call<Message> individualDelete(@Path("id") String id_no);
-
-    @Multipart
-    @PUT(INDIVIDUAL_UPDATE)
-    Call<Message> individualUpdate(@Path("id") String id_no, @Part("id_no") String id__no, @Part("password") String passwd, @Part("name") String name);
-
-    @POST(GROUP_AUTH)
-    Call<Message> groupAuth(@Header("Authorization") String auth, @Body String empty);
-
-    @GET("/")
-    Call<Message> trial();
-
 
 }

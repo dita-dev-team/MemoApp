@@ -1,9 +1,12 @@
 package com.dita.dev.memoapp.ui.fragment;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.bus.RegisterEvent;
+import com.dita.dev.memoapp.ui.activity.WelcomeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +30,7 @@ import de.greenrobot.event.EventBus;
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends BaseFragment {
-
+    WelcomeActivity parent;
     @Bind(R.id.signup_username)
     EditText usernameEditText;
     @Bind(R.id.signup_pass)
@@ -35,6 +39,7 @@ public class RegisterFragment extends BaseFragment {
     EditText pass1EditText;
     @Bind(R.id.user_type)
     Spinner userTypeSpinner;
+
 
     RegisterEvent registerEvent;
     private String passwd1;
@@ -45,6 +50,7 @@ public class RegisterFragment extends BaseFragment {
 
     public RegisterFragment() {
         // Required empty public constructor
+        parent = (WelcomeActivity) getActivity();
     }
 
 
@@ -64,7 +70,7 @@ public class RegisterFragment extends BaseFragment {
         if (i == EditorInfo.IME_ACTION_DONE) {
             InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-            login();
+            //register();
             return true;
         }
         /*
@@ -84,26 +90,19 @@ public class RegisterFragment extends BaseFragment {
 
     @OnClick(R.id.register_button)
     public void register(View view) {
-        username = usernameEditText.getText().toString();
+        username = usernameEditText.getText().toString().trim();
         passwd = passEditText.getText().toString().trim();
         passwd1 = pass1EditText.getText().toString().trim();
         userType = userTypeSpinner.getSelectedItem().toString().trim().toLowerCase();
+        if (userType.equals("user type")) {
+            //Snackbar.make(ButterKnife.findById(null,WelcomeActivity,R.id.coordinator),"Please Choose a User Type",Snackbar.LENGTH_SHORT).show();
+            return;
+        }
         if (passwd.equals(passwd1)) {
             registerEvent = new RegisterEvent(username, passwd, userType);
             EventBus.getDefault().post(registerEvent);
         } else {
             pass1EditText.setError("Password not similar");
         }
-
-
-    }
-
-    private void login() {
-
-        userType = usernameEditText.getText().toString().trim();
-        passwd = passEditText.getText().toString().trim();
-        registerEvent = new RegisterEvent(userType, username, passwd);
-        EventBus.getDefault().post(registerEvent);
-
     }
 }

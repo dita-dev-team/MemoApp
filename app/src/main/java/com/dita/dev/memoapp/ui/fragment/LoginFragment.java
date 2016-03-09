@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.bus.RegisterStatus;
 import com.dita.dev.memoapp.bus.SignInEvent;
+import com.dita.dev.memoapp.bus.SignInStatus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class LoginFragment extends BaseFragment {
     @Bind(R.id.login_pass)
     EditText pass;
 
-    String id;
+    String username;
     String passwd;
     SignInEvent signInEvent;
 
@@ -68,14 +69,14 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void init() {
-        id = login.getText().toString();
-        passwd = pass.getText().toString();
-        signInEvent = new SignInEvent(id, passwd);
+        username = login.getText().toString().trim();
+        passwd = pass.getText().toString().trim();
+        signInEvent = new SignInEvent(username, passwd);
     }
 
     private void login() {
-        EventBus.getDefault().post(new RegisterStatus());
-        //EventBus.getDefault().post(signInEvent);
+        //EventBus.getDefault().post(new SignInStatus());
+        EventBus.getDefault().post(signInEvent);
 
     }
 }
