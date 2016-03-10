@@ -1,11 +1,9 @@
 package com.dita.dev.memoapp.ui.fragment;
 
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,19 +16,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dita.dev.memoapp.R;
+import com.dita.dev.memoapp.bus.NotificationEvent;
 import com.dita.dev.memoapp.bus.RegisterEvent;
-import com.dita.dev.memoapp.ui.activity.WelcomeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
+import static com.dita.dev.memoapp.utility.Validation.isValid;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends BaseFragment {
-    WelcomeActivity parent;
     @Bind(R.id.signup_username)
     EditText usernameEditText;
     @Bind(R.id.signup_pass)
@@ -50,7 +49,6 @@ public class RegisterFragment extends BaseFragment {
 
     public RegisterFragment() {
         // Required empty public constructor
-        parent = (WelcomeActivity) getActivity();
     }
 
 
@@ -90,14 +88,21 @@ public class RegisterFragment extends BaseFragment {
 
     @OnClick(R.id.register_button)
     public void register(View view) {
+        if (!(isValid(usernameEditText, true, true) && isValid(passEditText, false, true))) return;
+
         username = usernameEditText.getText().toString().trim();
         passwd = passEditText.getText().toString().trim();
         passwd1 = pass1EditText.getText().toString().trim();
         userType = userTypeSpinner.getSelectedItem().toString().trim().toLowerCase();
         if (userType.equals("user type")) {
-            //Snackbar.make(ButterKnife.findById(null,WelcomeActivity,R.id.coordinator),"Please Choose a User Type",Snackbar.LENGTH_SHORT).show();
+            NotificationEvent notificationEvent = new NotificationEvent();
+            notificationEvent.message = "Choose a User Type";
+            notificationEvent.length = Snackbar.LENGTH_SHORT;
+            EventBus.getDefault().post(notificationEvent);
             return;
         }
+
+
         if (passwd.equals(passwd1)) {
             registerEvent = new RegisterEvent(username, passwd, userType);
             EventBus.getDefault().post(registerEvent);
