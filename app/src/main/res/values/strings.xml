@@ -16,4 +16,12 @@
         <item>Individual</item>
         <item>Group</item>
     </string-array>
+
+    <!-- Default values for profile -->
+    <string name="profile_name">Dita Memo</string>
+    <string name="profile_email">ditamemo@gmail.com</string>
+    <string name="profile_description">Memo Description</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_an_action">Select</string>
+    <string name="memoapp_root_directory">MemoApp</string>
 </resources>

@@ -32,19 +32,24 @@
                 android:paddingRight="@dimen/padding_horizontal"
                 android:paddingTop="@dimen/padding_vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:text="Android Studio"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:hint="@string/profile_name"
+                    android:inputType="text"
                     android:textColor="#212121"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="18sp" />
+
 
                 <View style="@style/vertical_divider"></View>
 
                 <ImageButton
-                    android:id="@+id/profile_name_edit"
+                    android:id="@+id/profile_name_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -75,19 +80,23 @@
                 android:paddingRight="@dimen/padding_horizontal"
                 android:paddingTop="@dimen/padding_vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/profile_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
-                    android:text="android.studio@android.com"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:hint="@string/profile_email"
+                    android:inputType="textEmailAddress"
                     android:textColor="#212121"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="18sp" />
 
                 <View style="@style/vertical_divider"></View>
 
                 <ImageButton
-                    android:id="@+id/profile_email_edit"
+                    android:id="@+id/profile_email_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -119,27 +128,31 @@
                 android:paddingRight="@dimen/padding_horizontal"
                 android:paddingTop="@dimen/padding_vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/profile_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:text="@string/dummy_text"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:hint="@string/profile_description"
+                    android:inputType="textMultiLine"
                     android:textColor="#212121"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="18sp" />
 
                 <View style="@style/vertical_divider"></View>
 
                 <ImageButton
-                    android:id="@+id/profile_desc_edit"
+                    android:id="@+id/profile_desc_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="top"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:clickable="true"
-                    android:src="@drawable/ic_edit"
-                    android:layout_gravity="top" />
+                    android:src="@drawable/ic_edit" />
 
             </LinearLayout>
 

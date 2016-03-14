@@ -10,4 +10,8 @@
     <!-- Padding dimensions for cardviews. -->
     <dimen name="padding_horizontal">10dp</dimen>
     <dimen name="padding_vertical">20dp</dimen>
+
+    <!-- Padding dimensions for cardviews with editexts -->
+    <dimen name="padding_horizontal_edit">10dp</dimen>
+    <dimen name="padding_vertical_edit">10dp</dimen>
 </resources>
