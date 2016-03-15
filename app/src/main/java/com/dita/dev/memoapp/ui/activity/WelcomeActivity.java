@@ -2,7 +2,6 @@ package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,10 +12,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.dita.dev.memoapp.R;
+import com.dita.dev.memoapp.bus.NotificationEvent;
 import com.dita.dev.memoapp.bus.RegisterEvent;
-import com.dita.dev.memoapp.bus.SignInStatus;
 import com.dita.dev.memoapp.bus.RegisterStatus;
 import com.dita.dev.memoapp.bus.SignInEvent;
+import com.dita.dev.memoapp.bus.SignInStatus;
 import com.dita.dev.memoapp.data.DataManager;
 import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.LoginFragment;
@@ -115,6 +115,14 @@ public class WelcomeActivity extends AppCompatActivity {
          refreshLayout.setRefreshing(false);
      }
  */
+
+    @Subscribe
+    public void onEvent(NotificationEvent event) {
+        if (event.message != null) {
+            Snackbar.make(coordinatorLayout, event.message, event.length).show();
+        }
+    }
+
     public void register(View view) {
         // startActivity(new Intent(this, SignupActivity.class));
         Fragment register = new RegisterFragment();
