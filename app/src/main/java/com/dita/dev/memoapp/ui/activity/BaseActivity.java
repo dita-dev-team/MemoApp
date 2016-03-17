@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
+import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -138,4 +139,11 @@ public class BaseActivity extends AppCompatActivity
     public void openProfile(View view) {
         startActivity(new Intent(this, ProfileActivity.class));
     }
+
+    public void launchSettingsActivity(MenuItem item) {
+
+        Intent launchSettings = new Intent(this, SettingsActivity.class);
+        startActivity(launchSettings);
+        finish();
+}
 }
