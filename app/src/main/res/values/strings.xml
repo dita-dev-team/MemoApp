@@ -24,4 +24,6 @@
     <string name="cancel">Cancel</string>
     <string name="select_an_action">Select</string>
     <string name="memoapp_root_directory">MemoApp</string>
+    <string name="title_activity_compose">Compose</string>
+
 </resources>
