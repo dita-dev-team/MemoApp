@@ -14,7 +14,7 @@
         <activity
             android:name=".ui.activity.WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.BaseActivity"
             android:label="@string/app_name"
@@ -34,6 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dita.dev.memoapp.ui.activity.BaseActivity" />
         </activity>
+        <activity android:name=".ui.activity.EditProfileActivity"></activity>
     </application>
 
 </manifest>

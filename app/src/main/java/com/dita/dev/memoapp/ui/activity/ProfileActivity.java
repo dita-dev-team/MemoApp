@@ -1,19 +1,30 @@
 package com.dita.dev.memoapp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.dita.dev.memoapp.R;
+import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.utility.ImagePickUp;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    @Bind(R.id.profile_name)
+    EditText userName;
+    @Bind(R.id.profile_email)
+    EditText userEmail;
+    @Bind(R.id.profile_desc)
+    EditText userDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,35 +36,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageView name = (ImageView) findViewById(R.id.profile_name_button);
-        name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText name = (EditText) findViewById(R.id.profile_name);
-                name.setFocusableInTouchMode(true);
-                name.requestFocus();
-            }
-        });
+        ButterKnife.bind(this);
 
-        ImageView email = (ImageView) findViewById(R.id.profile_email_button);
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText email = (EditText) findViewById(R.id.profile_email);
-                email.setFocusableInTouchMode(true);
-                email.requestFocus();
-            }
-        });
-
-        ImageView description = (ImageView) findViewById(R.id.profile_desc_button);
-        description.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText desc = (EditText) findViewById(R.id.profile_desc);
-                desc.setFocusableInTouchMode(true);
-                desc.requestFocus();
-            }
-        });
+        Init(this);
 
         CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -78,5 +63,22 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Init(this);
+    }
+
+    @OnClick(R.id.profile_edit_button)
+    public void EditProfile(View view) {
+        startActivity(new Intent(this, EditProfileActivity.class));
+    }
+
+    public void Init(Context context) {
+        userName.setText(PrefSettings.getPrefUserName(context));
+        userEmail.setText(PrefSettings.getPrefUserEmail(context));
+        userDesc.setText(PrefSettings.getPrefUserDescription(context));
     }
 }
