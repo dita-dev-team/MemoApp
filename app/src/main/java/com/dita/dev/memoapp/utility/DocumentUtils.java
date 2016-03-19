@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.utility;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,5 +47,12 @@ public class DocumentUtils {
                 return view;
             }
         };
+    }
+
+    public static AlertDialog.Builder buildConfirmationDialog(final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Confirmation").setMessage("Are you sure?");
+
+        return builder;
     }
 }
