@@ -1,7 +1,6 @@
 package com.dita.dev.memoapp;
 
 import com.dita.dev.memoapp.data.model.MemoResponse;
-import com.dita.dev.memoapp.data.model.User;
 import com.dita.dev.memoapp.data.model.UserData;
 import com.dita.dev.memoapp.data.remote.MemoDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,18 +9,19 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
-public class MemoTests {
+public class MemoApiTests {
     private ObjectMapper mapper;
     private SimpleModule module;
 
