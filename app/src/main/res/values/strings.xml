@@ -24,4 +24,10 @@
     <string name="cancel">Cancel</string>
     <string name="select_an_action">Select</string>
     <string name="memoapp_root_directory">MemoApp</string>
+    <string-array name="memoapp_directories">
+        <item>/Media/Audio</item>
+        <item>/Media/Documents</item>
+        <item>/Media/Images</item>
+        <item>/Media/Video</item>
+    </string-array>
 </resources>

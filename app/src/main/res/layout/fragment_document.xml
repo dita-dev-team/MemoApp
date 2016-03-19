@@ -2,17 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context="com.dita.dev.memoapp.ui.fragment.DocumentFragment">
 
-    <TextView
-        android:text="Document_Fragment"
+    <GridView
+        android:id="@+id/document_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:stretchMode="columnWidth" />
 
     <ListView
-        android:id="@+id/documentList"
+        android:id="@+id/document_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
 
 </FrameLayout>

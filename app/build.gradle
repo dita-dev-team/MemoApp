@@ -22,6 +22,11 @@ android {
     }
     productFlavors {
     }
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
@@ -45,3 +50,4 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-jackson:2.0.0-beta4'
     compile 'org.glassfish:javax.annotation:10.0-b28'
 }
+
