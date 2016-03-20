@@ -39,11 +39,18 @@ public class DocumentUtils {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                String title = list.get(position).getName();
+                String title = FileUtils.removeWhitespace(list.get(position).getName());
+                String fileType = FileUtils.getFileType(title);
+                String genFileType = FileUtils.getGenericFileType(fileType);
+                int iconId = FileUtils.mimeTypes.get(genFileType);
                 ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
-                imageView.setImageResource(R.drawable.file_general);
-                TextView textview = (TextView) view.findViewById(R.id.document_list_title);
-                textview.setText(title);
+                imageView.setImageResource(iconId);
+                TextView titleTextview = (TextView) view.findViewById(R.id.document_list_title);
+                titleTextview.setText(title);
+                String date = FileUtils.getLastModifiedDate(list.get(position));
+                System.out.println(date);
+                TextView detailsTextView = (TextView) view.findViewById(R.id.document_list_details);
+                detailsTextView.setText(date);
                 return view;
             }
         };

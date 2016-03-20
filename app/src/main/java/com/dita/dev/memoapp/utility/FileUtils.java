@@ -5,6 +5,7 @@ import android.webkit.MimeTypeMap;
 
 import com.dita.dev.memoapp.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -69,6 +70,13 @@ public class FileUtils {
         }
 
         return genericFileType;
+    }
+
+    public static String getLastModifiedDate(File file) {
+        String formattedDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm a");
+        formattedDate = format.format(new Date(file.lastModified()));
+        return formattedDate;
     }
 
     public static String getUniqueFilename(String extension) {

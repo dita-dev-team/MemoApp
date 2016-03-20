@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.utility.DocumentUtils;
@@ -40,10 +41,15 @@ import butterknife.OnItemLongClick;
  */
 public class DocumentFragment extends Fragment {
 
-    static ArrayAdapter<File> arrayAdapter;
+    static ArrayAdapter<File> gridArrayAdapter;
+    static ArrayAdapter<File> listArrayAdapter;
     static ActionMode actionMode = null;
+
+    ViewSwitcher viewSwitcher;
     @Bind(R.id.document_grid)
     GridView gridView;
+    @Bind(R.id.document_list)
+    ListView listView;
 
     public DocumentFragment() {
         // Required empty public constructor
@@ -71,8 +77,10 @@ public class DocumentFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                arrayAdapter.getItem(position).delete();
-                                arrayAdapter.remove(arrayAdapter.getItem(position));
+                                File file = gridArrayAdapter.getItem(position);
+                                gridArrayAdapter.remove(file);
+                                listArrayAdapter.remove(file);
+                                file.delete();
                                 Toast.makeText(context, "Operation completed successfully", Toast.LENGTH_SHORT).show();
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -111,19 +119,24 @@ public class DocumentFragment extends Fragment {
         ButterKnife.bind(this, view);
         ExternalStorageUtils.createAppDirectories(getContext());
         List<File> array = ExternalStorageUtils.getAllMedia();
+        viewSwitcher = (ViewSwitcher) view.findViewById(R.id.document_view);
         gridView = (GridView) view.findViewById(R.id.document_grid);
-        arrayAdapter = DocumentUtils.buildGridItem(this.getContext(), array);
-        gridView.setAdapter(arrayAdapter);
+        gridArrayAdapter = DocumentUtils.buildGridItem(getContext(), array);
+        gridView.setAdapter(gridArrayAdapter);
         //gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
 
         ListView listView = (ListView) view.findViewById(R.id.document_list);
+        listArrayAdapter = DocumentUtils.buildListItem(getContext(), array);
+        listView.setAdapter(listArrayAdapter);
+
+        viewSwitcher.showNext();
 
         return view;
     }
 
     @OnItemClick(R.id.document_grid)
     public void onItemClick(int position) {
-        File file = arrayAdapter.getItem(position);
+        File file = gridArrayAdapter.getItem(position);
         Uri uri = Uri.fromFile(file);
 
         Intent intent = new Intent();
@@ -138,7 +151,7 @@ public class DocumentFragment extends Fragment {
 
     }
 
-    @OnItemLongClick(R.id.document_grid)
+    @OnItemLongClick({R.id.document_grid, R.id.document_list})
     public boolean onItemLongClick(int position) {
         if (actionMode != null) {
             return false;
