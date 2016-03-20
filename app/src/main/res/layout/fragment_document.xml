@@ -36,31 +36,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-            <RadioGroup
+            <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    android:clickable="true"
-                    android:src="@drawable/ic_view_grid_blue" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    android:clickable="true"
-                    android:src="@drawable/ic_view_list_blue" />
-            </RadioGroup>
+                android:layout_weight="8" />
 
 
+            <ImageButton
+                android:id="@+id/document_grid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:src="@drawable/button_grid_view" />
+
+            <ImageButton
+                android:id="@+id/document_list_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:src="@drawable/button_list_view" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 

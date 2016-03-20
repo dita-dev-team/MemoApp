@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
@@ -50,6 +52,10 @@ public class DocumentFragment extends Fragment {
     GridView gridView;
     @Bind(R.id.document_list)
     ListView listView;
+    @Bind(R.id.document_grid_view)
+    ImageButton gridViewButton;
+    @Bind(R.id.document_list_view)
+    ImageButton listViewButton;
 
     public DocumentFragment() {
         // Required empty public constructor
@@ -120,16 +126,19 @@ public class DocumentFragment extends Fragment {
         ExternalStorageUtils.createAppDirectories(getContext());
         List<File> array = ExternalStorageUtils.getAllMedia();
         viewSwitcher = (ViewSwitcher) view.findViewById(R.id.document_view);
+
         gridView = (GridView) view.findViewById(R.id.document_grid);
         gridArrayAdapter = DocumentUtils.buildGridItem(getContext(), array);
         gridView.setAdapter(gridArrayAdapter);
-        //gridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
 
         ListView listView = (ListView) view.findViewById(R.id.document_list);
         listArrayAdapter = DocumentUtils.buildListItem(getContext(), array);
         listView.setAdapter(listArrayAdapter);
 
-        viewSwitcher.showNext();
+        gridViewButton = (ImageButton) view.findViewById(R.id.document_grid_view);
+        gridViewButton.setSelected(true);
+        listViewButton = (ImageButton) view.findViewById(R.id.document_list_view);
+        //viewSwitcher.showNext();
 
         return view;
     }
@@ -159,6 +168,27 @@ public class DocumentFragment extends Fragment {
 
         actionMode = getActivity().startActionMode(buildCallback(getContext(), position));
         return true;
+    }
+
+    @OnClick({R.id.document_grid_view, R.id.document_list_view})
+    public void onViewButtonsClick(View view) {
+        if (view.getId() == gridViewButton.getId()) {
+            if (gridViewButton.isSelected()) {
+                return;
+            } else {
+                viewSwitcher.showPrevious();
+                gridViewButton.setSelected(true);
+                listViewButton.setSelected(false);
+            }
+        } else if (view.getId() == listViewButton.getId()) {
+            if (listViewButton.isSelected()) {
+                return;
+            } else {
+                viewSwitcher.showNext();
+                listViewButton.setSelected(true);
+                gridViewButton.setSelected(false);
+            }
+        }
     }
 
 }
