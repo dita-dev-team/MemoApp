@@ -24,9 +24,13 @@ public class DocumentUtils {
                 String title = FileUtils.removeWhitespace(list.get(position).getName());
                 String fileType = FileUtils.getFileType(title);
                 String genFileType = FileUtils.getGenericFileType(fileType);
-                int iconId = FileUtils.mimeTypes.get(genFileType);
-                ImageView imageView = (ImageView) view.findViewById(R.id.document_grid_icon);
-                imageView.setImageResource(iconId);
+
+                if (genFileType != null) {
+                    int iconId = FileUtils.mimeTypes.get(genFileType);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.document_grid_icon);
+                    imageView.setImageResource(iconId);
+                }
+
                 TextView textview = (TextView) view.findViewById(R.id.document_grid_title);
                 textview.setText(title);
                 return view;
@@ -42,13 +46,16 @@ public class DocumentUtils {
                 String title = FileUtils.removeWhitespace(list.get(position).getName());
                 String fileType = FileUtils.getFileType(title);
                 String genFileType = FileUtils.getGenericFileType(fileType);
-                int iconId = FileUtils.mimeTypes.get(genFileType);
-                ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
-                imageView.setImageResource(iconId);
-                TextView titleTextview = (TextView) view.findViewById(R.id.document_list_title);
-                titleTextview.setText(title);
+
+                if (genFileType != null) {
+                    int iconId = FileUtils.mimeTypes.get(genFileType);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
+                    imageView.setImageResource(iconId);
+                }
+
+                TextView titleTextView = (TextView) view.findViewById(R.id.document_list_title);
+                titleTextView.setText(title);
                 String date = FileUtils.getLastModifiedDate(list.get(position));
-                System.out.println(date);
                 TextView detailsTextView = (TextView) view.findViewById(R.id.document_list_details);
                 detailsTextView.setText(date);
                 return view;

@@ -56,6 +56,10 @@ public class FileUtils {
     }
 
     public static String getGenericFileType(String fileType) {
+        if (fileType == null) {
+            return null;
+        }
+
         String genericFileType = null;
         if (Arrays.asList(videoTypes).contains(fileType)) {
             genericFileType = "video";
