@@ -143,7 +143,7 @@ public class DocumentFragment extends Fragment {
         return view;
     }
 
-    @OnItemClick(R.id.document_grid)
+    @OnItemClick({R.id.document_grid, R.id.document_list})
     public void onItemClick(int position) {
         File file = gridArrayAdapter.getItem(position);
         Uri uri = Uri.fromFile(file);
