@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.dita.dev.memoapp.ui.activity.ComposeActivity"
-    tools:showIn="@layout/activity_compose">
+    tools:showIn="@layout/activity_compose2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +16,12 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/edtxtFrom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edtxtFrom"
 
-            android:textColor="@color/compose_text_color"
             android:hint="From"
+            android:textColor="@color/compose_text_color"
             android:textColorHint="@color/compose_hint_text" />
 
         <EditText
@@ -43,9 +43,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/compose_text_color"
-            android:hint="Compose"
             android:gravity="top"
+            android:hint="Compose"
+            android:textColor="@color/compose_text_color"
             android:textColorHint="@color/compose_hint_text" />
     </LinearLayout>
 

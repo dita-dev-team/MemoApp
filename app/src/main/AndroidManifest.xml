@@ -3,6 +3,7 @@
     package="com.dita.dev.memoapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MemoApp"
@@ -34,7 +35,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dita.dev.memoapp.ui.activity.BaseActivity" />
         </activity>
-        <activity android:name=".ui.activity.EditProfileActivity"></activity>
+        <activity android:name=".ui.activity.EditProfileActivity" />
+        <activity
+            android:name=".ui.activity.ComposeActivity"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
