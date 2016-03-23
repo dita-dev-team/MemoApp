@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.utility;
 
 
+import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
 import com.dita.dev.memoapp.R;
@@ -11,6 +12,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import eu.medsea.mimeutil.MimeUtil;
 
 
 public class FileUtils {
@@ -52,6 +55,14 @@ public class FileUtils {
             fileType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         }
 
+        return fileType;
+    }
+
+    public static String getFileType2(File file) {
+        String fileType = null;
+        Uri fileUri = Uri.fromFile(file);
+        MimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
+        fileType = MimeUtil.getFirstMimeType(MimeUtil.getMimeTypes(file).toString()).toString();
         return fileType;
     }
 
