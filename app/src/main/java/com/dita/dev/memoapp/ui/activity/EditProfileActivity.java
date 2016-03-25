@@ -40,7 +40,7 @@ public class EditProfileActivity extends AppCompatActivity {
         userDesc.setText(PrefSettings.getPrefUserDescription(context));
     }
 
-    public void SaveProfile(View view) {
+    public void saveProfile(View view) {
         username = userName.getText().toString().trim();
         email = userEmail.getText().toString().trim();
         desc = userDesc.getText().toString().trim();
@@ -50,5 +50,9 @@ public class EditProfileActivity extends AppCompatActivity {
         PrefSettings.setPrefUserEmail(context, email);
         PrefSettings.setPrefUserDescription(context, desc);
         onBackPressed();
+    }
+
+    public void closeEditProfile(View view) {
+        super.onBackPressed();
     }
 }

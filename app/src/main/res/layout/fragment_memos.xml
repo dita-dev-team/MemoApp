@@ -30,13 +30,16 @@
                 android:layout_weight="8"
                 android:background="@color/transparent"
                 android:text="New Memo"
+                android:onClick="MemoClick"
                 android:textAllCaps="false"
+                android:id="@+id/newMemo"
                 android:textColor="@color/black" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/camera_compose"
                 android:background="@color/transparent"
                 android:clickable="true"
                 android:src="@drawable/ic_camera" />

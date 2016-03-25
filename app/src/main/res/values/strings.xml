@@ -30,4 +30,6 @@
         <item>/Media/Images</item>
         <item>/Media/Video</item>
     </string-array>
+    <string name="title_activity_compose">Compose</string>
+
 </resources>

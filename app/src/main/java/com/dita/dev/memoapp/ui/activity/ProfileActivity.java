@@ -2,6 +2,8 @@ package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,10 @@ import android.widget.EditText;
 import com.dita.dev.memoapp.R;
 import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.utility.ImagePickUp;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,6 +31,10 @@ public class ProfileActivity extends AppCompatActivity {
     EditText userEmail;
     @Bind(R.id.profile_desc)
     EditText userDesc;
+    @Bind(R.id.profile_image)
+    CircleImageView profileImage;
+
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         Init(this);
 
-        CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ImagePickUp.openMediaSelector(ProfileActivity.this);
-            }
-        });
     }
 
     @Override
@@ -57,7 +59,20 @@ public class ProfileActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == ImagePickUp.IMAGE_FILE_CODE) {
                 if (data != null) {
-                    System.out.println("is not null");
+                    if (bitmap != null) {
+                        bitmap.recycle();
+                    }
+
+                    try {
+                        InputStream stream = getContentResolver().openInputStream(data.getData());
+                        bitmap = BitmapFactory.decodeStream(stream);
+                        stream.close();
+                        profileImage.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("is null");
                 }
@@ -72,8 +87,18 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.profile_edit_button)
-    public void EditProfile(View view) {
+    public void editProfile(View view) {
         startActivity(new Intent(this, EditProfileActivity.class));
+    }
+
+    @OnClick(R.id.profile_image)
+    public void editProfileImage(View view) {
+        ImagePickUp.openMediaSelector(ProfileActivity.this);
+        //Intent intent = new Intent();
+        //intent.setType("image/*");
+        //intent.setAction(Intent.ACTION_GET_CONTENT);
+        //intent.addCategory(Intent.CATEGORY_OPENABLE);
+        //startActivityForResult(intent, ImagePickUp.IMAGE_FILE_CODE);
     }
 
     public void Init(Context context) {
