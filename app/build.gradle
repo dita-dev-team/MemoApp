@@ -49,5 +49,6 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
     compile 'com.squareup.retrofit2:converter-jackson:2.0.0-beta4'
     compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'eu.medsea.mimeutil:mime-util:2.1.1'
 }
 

@@ -1,15 +1,19 @@
 package com.dita.dev.memoapp.utility;
 
 
+import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
 import com.dita.dev.memoapp.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import eu.medsea.mimeutil.MimeUtil;
 
 
 public class FileUtils {
@@ -54,7 +58,19 @@ public class FileUtils {
         return fileType;
     }
 
+    public static String getFileType2(File file) {
+        String fileType = null;
+        Uri fileUri = Uri.fromFile(file);
+        MimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
+        fileType = MimeUtil.getFirstMimeType(MimeUtil.getMimeTypes(file).toString()).toString();
+        return fileType;
+    }
+
     public static String getGenericFileType(String fileType) {
+        if (fileType == null) {
+            return null;
+        }
+
         String genericFileType = null;
         if (Arrays.asList(videoTypes).contains(fileType)) {
             genericFileType = "video";
@@ -69,6 +85,13 @@ public class FileUtils {
         }
 
         return genericFileType;
+    }
+
+    public static String getLastModifiedDate(File file) {
+        String formattedDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm a");
+        formattedDate = format.format(new Date(file.lastModified()));
+        return formattedDate;
     }
 
     public static String getUniqueFilename(String extension) {

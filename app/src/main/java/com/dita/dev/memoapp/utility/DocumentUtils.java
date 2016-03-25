@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.utility;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,16 @@ public class DocumentUtils {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                String title = FileUtils.removeWhitespace(list.get(position).getName());
-                String fileType = FileUtils.getFileType(title);
+                String title = list.get(position).getName();
+                String fileType = FileUtils.getFileType2(list.get(position));
                 String genFileType = FileUtils.getGenericFileType(fileType);
-                int iconId = FileUtils.mimeTypes.get(genFileType);
-                ImageView imageView = (ImageView) view.findViewById(R.id.document_grid_icon);
-                imageView.setImageResource(iconId);
+
+                if (genFileType != null) {
+                    int iconId = FileUtils.mimeTypes.get(genFileType);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.document_grid_icon);
+                    imageView.setImageResource(iconId);
+                }
+
                 TextView textview = (TextView) view.findViewById(R.id.document_grid_title);
                 textview.setText(title);
                 return view;
@@ -39,12 +44,29 @@ public class DocumentUtils {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 String title = list.get(position).getName();
-                ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
-                imageView.setImageResource(R.drawable.file_general);
-                TextView textview = (TextView) view.findViewById(R.id.document_list_title);
-                textview.setText(title);
+                String fileType = FileUtils.getFileType2(list.get(position));
+                String genFileType = FileUtils.getGenericFileType(fileType);
+
+                if (genFileType != null) {
+                    int iconId = FileUtils.mimeTypes.get(genFileType);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
+                    imageView.setImageResource(iconId);
+                }
+
+                TextView titleTextView = (TextView) view.findViewById(R.id.document_list_title);
+                titleTextView.setText(title);
+                String date = FileUtils.getLastModifiedDate(list.get(position));
+                TextView detailsTextView = (TextView) view.findViewById(R.id.document_list_details);
+                detailsTextView.setText(date);
                 return view;
             }
         };
+    }
+
+    public static AlertDialog.Builder buildConfirmationDialog(final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Confirmation").setMessage("Are you sure?");
+
+        return builder;
     }
 }

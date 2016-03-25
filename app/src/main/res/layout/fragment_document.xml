@@ -1,21 +1,69 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+    android:orientation="vertical"
     tools:context="com.dita.dev.memoapp.ui.fragment.DocumentFragment">
 
-    <GridView
-        android:id="@+id/document_grid"
+    <ViewSwitcher
+        android:id="@+id/document_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3"
-        android:stretchMode="columnWidth" />
+        android:layout_weight="1"
+        android:padding="5dp">
 
-    <ListView
-        android:id="@+id/document_list"
+        <GridView
+            android:id="@+id/document_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            android:stretchMode="columnWidth" />
+
+        <ListView
+            android:id="@+id/document_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ViewSwitcher>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/memo_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8" />
+
+
+            <ImageButton
+                android:id="@+id/document_grid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:src="@drawable/button_grid_view" />
+
+            <ImageButton
+                android:id="@+id/document_list_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:src="@drawable/button_list_view" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>
