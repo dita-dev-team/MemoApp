@@ -35,6 +35,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dita.dev.memoapp.ui.activity.BaseActivity" />
         </activity>
+        <activity
+            android:name=".ui.activity.ComposeActivity"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.activity.EditProfileActivity"></activity>
     </application>
 
