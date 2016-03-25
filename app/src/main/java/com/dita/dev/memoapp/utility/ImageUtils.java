@@ -17,14 +17,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ImageUtils {
-    public static String getUniqueImageFilename(String extension) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-        Date now = new Date();
-        String fileName = formatter.format(now) + extension;
-        return fileName;
-    }
+
+    private static final Object lock = new Object();
+    private static int rotation = 0;
+    private static boolean exact;
+    private static boolean isRunning = false;
+    private static String galleryName;
+    //Image properties
+    private float width;
+    private float height;
+    private boolean isCamera;
 
     public static Bitmap getSizedBitmap(Context context, Uri uri, int size) throws IOException {
         InputStream input = context.getContentResolver().openInputStream(uri);
@@ -61,7 +66,7 @@ public class ImageUtils {
     public static boolean saveBitmapToFile(Bitmap pic, Context context) {
         boolean ret = false;
         final File path = new File(Environment.getExternalStorageDirectory() + File.separator + R.string.memoapp_root_directory + File.separator);
-        final String fname = getUniqueImageFilename(".png");
+        final String fname = FileUtils.getUniqueFilename(".png");
         final File file = new File(path, fname);
 
         if (pic != null) {
@@ -107,5 +112,25 @@ public class ImageUtils {
         Uri result = context.getContentResolver().insert(Images.Media.EXTERNAL_CONTENT_URI, image);
     }
 
+    public static File getOutputMediaFile() {
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "MemoApp");
 
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+
+        return new File(mediaStorageDir.getPath() + File.separator
+                + "IMG_" + FileUtils.getUniqueFilename(".jpg"));
+    }
 }

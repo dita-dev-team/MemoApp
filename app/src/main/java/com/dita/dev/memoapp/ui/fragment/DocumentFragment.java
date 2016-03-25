@@ -57,7 +57,7 @@ public class DocumentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_document, container, false);
-        getActivity().getActionBar().setTitle("Documennts");
+        //getActivity().getActionBar().setTitle("Documennts");
 
         ButterKnife.bind(this, view);
         ExternalStorageUtils.createAppDirectories(getContext());
