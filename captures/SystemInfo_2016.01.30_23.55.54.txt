@@ -1,0 +1,93 @@
+Applications Graphics Acceleration Info:
+Uptime: 9053864 Realtime: 9053864
+
+** Graphics info for pid 25561 [com.dita.dev.memoapp] **
+
+Recent DisplayList operations
+                  ClipRect
+                  DrawRenderNode
+                    Save
+                    ClipRect
+                    DrawText
+                    RestoreToCount
+                  DrawRenderNode
+                    DrawRenderNode
+                    Save
+                    ConcatMatrix
+                    Save
+                    DrawBitmap
+                    RestoreToCount
+                  RestoreToCount
+                DrawRenderNode
+                  DrawRoundRect
+                DrawRenderNode
+                  Save
+                  ClipRect
+                  DrawRenderNode
+                    Save
+                    ClipRect
+                    DrawText
+                    RestoreToCount
+                  RestoreToCount
+              RestoreToCount
+  DrawRenderNode
+    DrawRenderNode
+      DrawRect
+  DrawRenderNode
+    DrawRenderNode
+      DrawRect
+RestoreToCount
+DrawRect
+DrawRect
+DrawRect
+DrawRect
+DrawBitmapRect
+DrawBitmap
+DrawCircle
+DrawCircle
+DrawShadow
+DrawShadow
+DrawRoundRect
+DrawRoundRect
+DrawText
+DrawText
+DrawBitmap
+DrawRect
+DrawRect
+
+Caches:
+Current memory usage / total memory usage (bytes):
+  TextureCache         12332548 / 25165824
+  LayerCache                  0 / 16777216 (numLayers = 0)
+  Layers total          0 (numLayers = 0)
+  RenderBufferCache           0 /  2097152
+  GradientCache           10240 /   524288
+  PathCache                3430 / 10485760
+  TessellationCache        2976 /  1048576
+  TextDropShadowCache         0 /  2097152
+  PatchCache                 64 /   131072
+  FontRenderer 0 A8      524288 /   524288
+  FontRenderer 0 RGBA         0 /        0
+  FontRenderer 0 total   524288 /   524288
+Other:
+  FboCache                    0 /        0
+Total memory usage:
+  12873546 bytes, 12.28 MB
+
+Profile data in ms:
+
+	com.dita.dev.memoapp/com.dita.dev.memoapp.ui.activity.BaseActivity/android.view.ViewRootImpl@15a01c90 (visibility=8)
+	com.dita.dev.memoapp/com.dita.dev.memoapp.ui.activity.ProfileActivity/android.view.ViewRootImpl@25403989 (visibility=0)
+View hierarchy:
+
+  com.dita.dev.memoapp/com.dita.dev.memoapp.ui.activity.BaseActivity/android.view.ViewRootImpl@15a01c90
+  43 views, 34.27 kB of display lists
+
+  com.dita.dev.memoapp/com.dita.dev.memoapp.ui.activity.ProfileActivity/android.view.ViewRootImpl@25403989
+  28 views, 29.22 kB of display lists
+
+
+Total ViewRootImpl: 2
+Total Views:        71
+Total DisplayList:  63.48 kB
+
