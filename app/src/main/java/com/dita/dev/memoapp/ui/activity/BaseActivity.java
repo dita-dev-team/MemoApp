@@ -28,6 +28,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class BaseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -65,7 +67,6 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -120,17 +121,26 @@ public class BaseActivity extends AppCompatActivity
 
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(BaseActivity.this, "Settings pressed", Toast.LENGTH_SHORT).show();
+            {
+                startActivity(new Intent(this, SettingsActivity.class));
+            }
         } else if (id == R.id.nav_help) {
             Toast.makeText(BaseActivity.this, "Help pressed", Toast.LENGTH_SHORT).show();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     public void openProfile(View view) {
         startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    public void launchSettingsActivity(MenuItem item) {
+
+        Intent launchSettings = new Intent(this, SettingsActivity.class);
+        startActivity(launchSettings);
+        drawer.closeDrawer(GravityCompat.START);
     }
 }
