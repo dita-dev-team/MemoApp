@@ -122,6 +122,7 @@ public class DocumentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_document, container, false);
+
         ButterKnife.bind(this, view);
         ExternalStorageUtils.createAppDirectories(getContext());
         List<File> array = ExternalStorageUtils.getAllMedia();

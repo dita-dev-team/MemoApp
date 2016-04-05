@@ -9,22 +9,23 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore.Images;
 
-import com.dita.dev.memoapp.R;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ImageUtils {
-    public static String getUniqueImageFilename(String extension) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-        Date now = new Date();
-        String fileName = formatter.format(now) + extension;
-        return fileName;
-    }
+
+    private static final Object lock = new Object();
+    private static int rotation = 0;
+    private static boolean exact;
+    private static boolean isRunning = false;
+    private static String galleryName;
+    //Image properties
+    private float width;
+    private float height;
+    private boolean isCamera;
+
 
     public static Bitmap getSizedBitmap(Context context, Uri uri, int size) throws IOException {
         InputStream input = context.getContentResolver().openInputStream(uri);
@@ -58,30 +59,32 @@ public class ImageUtils {
         else return k;
     }
 
-    public static boolean saveBitmapToFile(Bitmap pic, Context context) {
-        boolean ret = false;
-        final File path = new File(Environment.getExternalStorageDirectory() + File.separator + R.string.memoapp_root_directory + File.separator);
-        final String fname = getUniqueImageFilename(".png");
-        final File file = new File(path, fname);
+    public static File saveBitmapToFile(Bitmap image, Context context) {
+        final File path = new File(ExternalStorageUtils.getRootDirectory(context) + File.separator);
+        final String filename = FileUtils.getUniqueFilename(".png");
+        final File file = new File(path, filename);
 
-        if (pic != null) {
+        if (image != null) {
             try {
                 // build directory
                 if (file.getParent() != null && !path.isDirectory()) {
                     path.mkdirs();
                 }
                 // output image to file
-                FileOutputStream fos = new FileOutputStream(file);
-                pic.compress(Bitmap.CompressFormat.PNG, 90, fos);
-                fos.close();
+                FileOutputStream stream = new FileOutputStream(file);
+                image.compress(Bitmap.CompressFormat.PNG, 90, stream);
+                stream.close();
                 addImageToContentProvider(context, file);
-                ret = true;
+                return file;
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
         }
-        return ret;
+
+        return null;
     }
+
 
     private static void addImageToContentProvider(Context context, File imageFile) {
         ContentValues image = new ContentValues();
@@ -107,5 +110,21 @@ public class ImageUtils {
         Uri result = context.getContentResolver().insert(Images.Media.EXTERNAL_CONTENT_URI, image);
     }
 
+    public static File getOutputMediaFile() {
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "MemoApp");
 
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+
+        return new File(mediaStorageDir.getPath() + File.separator
+                + "IMG_" + FileUtils.getUniqueFilename(".jpg"));
+    }
 }
