@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         //super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == ImagePickUp.IMAGE_FILE_CODE) {
+            if (requestCode == ImagePickUp.REQUEST_CODE) {
                 if (data != null) {
                     if (bitmap != null) {
                         bitmap.recycle();
