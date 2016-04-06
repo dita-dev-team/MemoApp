@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
+import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -46,7 +47,7 @@ public class BaseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -122,12 +123,16 @@ public class BaseActivity extends AppCompatActivity
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
             {
-                startActivity(new Intent(this, SettingsActivity.class));
+                Intent settings = new Intent(this, SettingsActivity.class);
+                startActivity(settings);
+                finish();
             }
         } else if (id == R.id.nav_help) {
             Toast.makeText(BaseActivity.this, "Help pressed", Toast.LENGTH_SHORT).show();
         }
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -143,4 +148,6 @@ public class BaseActivity extends AppCompatActivity
         startActivity(launchSettings);
         drawer.closeDrawer(GravityCompat.START);
     }
+
+
 }
