@@ -69,4 +69,9 @@ public class PrefSettings {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         sp.edit().putString(PREF_USER_PROFILE_IMAGE, uri).apply();
     }
+
+    public static void setPref(final Context context, String key, String value) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putString(key, value).apply();
+    }
 }
