@@ -27,8 +27,8 @@ public class ConnectionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_connections, container, false);
-        FragmentTransaction transaction1 = getFragmentManager().beginTransaction().replace(R.id.groupContainer, new GroupFragment());
-        FragmentTransaction transaction2 = getFragmentManager().beginTransaction().replace(R.id.individualsContainer, new IndividualsFragment());
+        FragmentTransaction transaction1 = getFragmentManager().beginTransaction().replace(R.id.group_container, new GroupFragment());
+        FragmentTransaction transaction2 = getFragmentManager().beginTransaction().replace(R.id.individuals_container, new IndividualsFragment());
         transaction1.commit();
         transaction2.commit();
 

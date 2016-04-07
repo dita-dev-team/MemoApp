@@ -132,7 +132,7 @@ public class DocumentFragment extends Fragment {
         gridArrayAdapter = DocumentUtils.buildGridItem(getContext(), array);
         gridView.setAdapter(gridArrayAdapter);
 
-        ListView listView = (ListView) view.findViewById(R.id.document_list);
+        listView = (ListView) view.findViewById(R.id.document_list);
         listArrayAdapter = DocumentUtils.buildListItem(getContext(), array);
         listView.setAdapter(listArrayAdapter);
 

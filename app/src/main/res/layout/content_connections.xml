@@ -15,17 +15,17 @@
     >
 
     <FrameLayout
-        android:id="@+id/groupContainer"
+        android:id="@+id/group_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"></FrameLayout>
 
 
     <FrameLayout
-        android:id="@+id/individualsContainer"
+        android:id="@+id/individuals_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"></FrameLayout>
 
 
 </LinearLayout>

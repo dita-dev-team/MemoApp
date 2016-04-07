@@ -10,42 +10,50 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/individualsTitles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Groups"
-            android:id="@+id/individualsTitles"
-            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/individualsExpand"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/individualsExpand"
+            android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/individualsExpand"
             android:layout_toStartOf="@+id/individualsExpand"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="Groups"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
+            android:id="@+id/individualsExpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="More"
-            android:id="@+id/individualsExpand"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:text="More" />
 
         <View
-            style="@style/horizontal_divider"
             android:id="@+id/divider"
+            style="@style/horizontal_divider"
             android:layout_below="@id/individualsTitles"
             android:layout_centerHorizontal="true" />
 
+        <TextView
+            android:id="@+id/group_no_connections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:text="@string/no_connections" />
+
         <GridView
+            android:id="@+id/group_grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/gridView"
-            android:layout_below="@+id/divider"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:numColumns="3" />
+            android:layout_below="@+id/divider"
+            android:numColumns="3"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </FrameLayout>

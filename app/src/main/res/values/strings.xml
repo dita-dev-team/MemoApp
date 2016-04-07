@@ -2,6 +2,9 @@
     <string name="app_name">MemoApp</string>
     <string name="action_settings">Settings</string>
 
+    <string name="default_name">MemoApp</string>
+    <string name="default_email">memoapp@memo.com</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_base">BaseActivity</string>
@@ -16,6 +19,9 @@
         <item>Individual</item>
         <item>Group</item>
     </string-array>
+
+    <!-- Defaut values for connections -->
+    <string name="no_connections">No Connections</string>
 
     <!-- Default values for profile -->
     <string name="profile_name">Dita Memo</string>
