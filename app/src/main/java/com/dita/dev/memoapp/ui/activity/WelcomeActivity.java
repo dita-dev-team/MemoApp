@@ -22,6 +22,7 @@ import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.LoginFragment;
 import com.dita.dev.memoapp.ui.fragment.RegisterFragment;
 import com.dita.dev.memoapp.ui.fragment.WelcomeActivityFragment;
+import com.dita.dev.memoapp.utility.ExternalStorageUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +49,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+
+        ExternalStorageUtils.createAppDirectories(this);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
 

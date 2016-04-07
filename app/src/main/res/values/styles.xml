@@ -11,8 +11,11 @@
         <item name="editTextStyle">@style/EditTextDark</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:spinnerItemStyle">@style/SpinnerItemDark</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/theme_primary</item>
 
     </style>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

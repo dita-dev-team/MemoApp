@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_flip"
+        android:icon="@drawable/ic_paperclip"
+        android:title="Attach"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_send"
+        android:icon="@drawable/ic_send"
+        android:title="/send"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/save_draft"
+        android:title="Save Draft"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help_feedback"
+        android:title="Help and Feedback"
+        app:showAsAction="never" />
+
+
+</menu>

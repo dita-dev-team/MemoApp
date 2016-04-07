@@ -15,6 +15,7 @@ public class PrefSettings {
     public static final String PREF_USER_NAME = "pref_user_name";
     public static final String PREF_USER_EMAIL = "pref_user_email";
     public static final String PREF_USER_DESCRIPTION = "pref_user_description";
+    public static final String PREF_USER_PROFILE_IMAGE = "pref_user_profile_image";
 
     public static final String PREF_ = "pref_";
 
@@ -57,5 +58,20 @@ public class PrefSettings {
     public static void setPrefUserDescription(final Context context, String userDescription) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         sp.edit().putString(PREF_USER_DESCRIPTION, userDescription).apply();
+    }
+
+    public static String getPrefUserProfileImage(final Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(PREF_USER_PROFILE_IMAGE, null);
+    }
+
+    public static void setPrefUserProfileImage(final Context context, String uri) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putString(PREF_USER_PROFILE_IMAGE, uri).apply();
+    }
+
+    public static void setPref(final Context context, String key, String value) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putString(key, value).apply();
     }
 }
