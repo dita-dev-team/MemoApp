@@ -120,17 +120,13 @@ public class BaseActivity extends AppCompatActivity
 
             Toast.makeText(BaseActivity.this, "Documents pressed", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings) {
-            {
-                Intent settings = new Intent(this, SettingsActivity.class);
-                startActivity(settings);
-                finish();
-            }
+
+            startActivity(new Intent(this, SettingsActivity.class));
+            //finish();
+
         } else if (id == R.id.nav_help) {
             Toast.makeText(BaseActivity.this, "Help pressed", Toast.LENGTH_SHORT).show();
         }
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -142,8 +138,7 @@ public class BaseActivity extends AppCompatActivity
 
     public void launchSettingsActivity(MenuItem item) {
 
-        Intent launchSettings = new Intent(this, SettingsActivity.class);
-        startActivity(launchSettings);
+        startActivity(new Intent(this, SettingsActivity.class));
         drawer.closeDrawer(GravityCompat.START);
     }
 
