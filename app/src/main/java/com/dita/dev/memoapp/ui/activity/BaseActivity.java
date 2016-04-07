@@ -36,8 +36,7 @@ public class BaseActivity extends AppCompatActivity
         super.setContentView(R.layout.activity_base);
 
         if (!PrefSettings.isLoggedIn(getApplicationContext())) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, WelcomeActivity.class));
             finish();
             return;
         }
