@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/memo_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/txtv_from"
+        android:layout_width="200px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/memo_image"
+        android:singleLine="true"
+        android:text="Dan"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+        android:id="@+id/txtv_date"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:text="Friday" />
+
+    <TextView
+        android:id="@+id/txtv_subject"
+        android:layout_width="400px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtv_from"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/memo_image"
+        android:layout_toRightOf="@+id/memo_image"
+        android:singleLine="true"
+        android:text="Wacha Kulala"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/txtv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/memo_image"
+        android:layout_below="@+id/txtv_subject"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/memo_image"
+        android:layout_toRightOf="@+id/memo_image"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Lorem ipsum dolizzle sit we gonna chung, pimpin' adipiscing elit. Nullam sapien velizzle, boom shackalack volutpizzle, bizzle mammasay mammasa mamma oo sa, gravida vizzle, gangsta. Pellentesque eget tortizzle. Sizzle erizzle. Crackalackin izzle dolor dapibus turpizzle sizzle for sure. Crunk pellentesque nibh et turpis. Break it down izzle ma nizzle. Pellentesque ghetto rhoncizzle that's the shizzle. In hac dawg platea bling bling. Bow wow wow dapibizzle. Curabitur tellus urna, yo mamma eu, mattizzle ac, shizzle my nizzle crocodizzle vitae, nunc. Yo go to hizzle. Integer pizzle hizzle sizzle bow wow wow." />
+</RelativeLayout>

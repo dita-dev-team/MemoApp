@@ -1,6 +1,7 @@
 package com.dita.dev.memoapp.ui.activity;
 
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.dita.dev.memoapp.R;
+import com.dita.dev.memoapp.data.database.MemosColumns;
+
+import java.util.Date;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ComposeActivity extends AppCompatActivity {
+    @Bind(R.id.edtxtTo)
+    EditText Username;
+    @Bind(R.id.edtxSubject)
+    EditText Subject;
+    @Bind(R.id.edtxtCompose)
+    EditText Message;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,15 +52,9 @@ public class ComposeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupActionBar();
+        ButterKnife.bind(this);
 
-       /* ImageButton cameraImage = (ImageButton) findViewById(R.id.camera_compose);
-        cameraImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                ImagePickUp.openMediaSelector(ComposeActivity.this);
-            }
-        });*/
 
 
     }
@@ -64,4 +73,15 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
 
+    public void saveDraft(MenuItem item) {
+        Date date = new Date();
+        ContentValues values = new ContentValues();
+        values.put(MemosColumns.USERNAME, Username.getText().toString().trim());
+        values.put(MemosColumns.SUBJECT, Subject.getText().toString().trim());
+        values.put(MemosColumns.MESSAGE, Message.getText().toString().trim());
+        values.put(MemosColumns.STATUS, "draft");
+        /*values.put(MemosColumns.DATE,Integer.valueOf(date.toString()));*/
+        getContentResolver().insert(MemoContract.Memos.CONTENT_URI, values);
+
+    }
 }

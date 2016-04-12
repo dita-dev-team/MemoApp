@@ -1,7 +1,8 @@
 package com.dita.dev.memoapp.ui.activity;
 
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dita.dev.memoapp.R;
+import com.dita.dev.memoapp.data.database.DBHelper;
 import com.dita.dev.memoapp.settings.PrefSettings;
 import com.dita.dev.memoapp.ui.fragment.ConnectionsFragment;
 import com.dita.dev.memoapp.ui.fragment.DocumentFragment;
@@ -29,6 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    SQLiteDatabase db;
+    SQLiteOpenHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,8 @@ public class BaseActivity extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
+
+        Init();
     }
 
     @Override
@@ -145,5 +151,10 @@ public class BaseActivity extends AppCompatActivity
         Intent launchSettings = new Intent(this, SettingsActivity.class);
         startActivity(launchSettings);
         finish();
-}
+    }
+
+    public void Init() {
+        helper = new DBHelper(this);
+        db = helper.getWritableDatabase();
+    }
 }

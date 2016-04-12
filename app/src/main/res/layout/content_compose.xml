@@ -19,12 +19,12 @@
             android:id="@+id/edtxtFrom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="From"
             android:textColor="@color/compose_text_color"
             android:textColorHint="@color/compose_hint_text" />
 
         <EditText
+            android:id="@+id/edtxtTo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="To"
@@ -33,6 +33,7 @@
 
 
         <EditText
+            android:id="@+id/edtxSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Subject"
@@ -41,6 +42,7 @@
 
 
         <EditText
+            android:id="@+id/edtxtCompose"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"

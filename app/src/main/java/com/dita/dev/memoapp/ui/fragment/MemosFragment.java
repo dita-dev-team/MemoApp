@@ -1,30 +1,36 @@
 package com.dita.dev.memoapp.ui.fragment;
 
 
-import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.dita.dev.memoapp.R;
-import com.dita.dev.memoapp.ui.activity.BaseActivity;
+import com.dita.dev.memoapp.adapters.customAdapter;
+import com.dita.dev.memoapp.data.database.MemosColumns;
 import com.dita.dev.memoapp.ui.activity.ComposeActivity;
+import com.dita.dev.memoapp.ui.activity.MemoContract;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.internal.ButterKnifeProcessor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MemosFragment extends Fragment {
-
+public class MemosFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final int URL_LOADER = 0;
+    customAdapter cAdapter;
+    @Bind(R.id.memos_list)
+    ListView memoList;
 
     public MemosFragment() {
         // Required empty public constructor
@@ -37,6 +43,10 @@ public class MemosFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memos, container, false);
         ButterKnife.bind(this, view);
+        getLoaderManager().initLoader(URL_LOADER, null, this);
+        if (cAdapter == null) {
+            memoList.setAdapter(cAdapter);
+        }
         return view;
     }
 
@@ -47,4 +57,34 @@ public class MemosFragment extends Fragment {
 
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        String[] projectionFields = new String[]{MemosColumns.ID, MemosColumns.USERNAME, MemosColumns.SUBJECT, MemosColumns.MESSAGE};
+        // Construct the loader
+        CursorLoader cursorLoader = new CursorLoader(getActivity(),
+                MemoContract.Memos.CONTENT_URI, // URI
+                projectionFields, // projection fields
+                null, // the selection criteria
+                null, // the selection args
+                null // the sort order
+        );
+        // Return the loader for use
+        return cursorLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (cAdapter == null) {
+            cAdapter = new customAdapter(getActivity(), data, 0);
+            memoList.setAdapter(cAdapter);
+        } else {
+            cAdapter.swapCursor(data);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }

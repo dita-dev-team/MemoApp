@@ -21,8 +21,8 @@ public class DocumentUtils {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                String title = FileUtils.removeWhitespace(list.get(position).getName());
-                String fileType = FileUtils.getFileType(title);
+                String title = list.get(position).getName();
+                String fileType = FileUtils.getFileType2(list.get(position));
                 String genFileType = FileUtils.getGenericFileType(fileType);
 
                 if (genFileType != null) {
@@ -43,8 +43,8 @@ public class DocumentUtils {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                String title = FileUtils.removeWhitespace(list.get(position).getName());
-                String fileType = FileUtils.getFileType(title);
+                String title = list.get(position).getName();
+                String fileType = FileUtils.getFileType2(list.get(position));
                 String genFileType = FileUtils.getGenericFileType(fileType);
 
                 if (genFileType != null) {
@@ -52,8 +52,9 @@ public class DocumentUtils {
                     ImageView imageView = (ImageView) view.findViewById(R.id.document_list_icon);
                     imageView.setImageResource(iconId);
                 }
-                TextView titleTextview = (TextView) view.findViewById(R.id.document_list_title);
-                titleTextview.setText(title);
+
+                TextView titleTextView = (TextView) view.findViewById(R.id.document_list_title);
+                titleTextView.setText(title);
                 String date = FileUtils.getLastModifiedDate(list.get(position));
                 TextView detailsTextView = (TextView) view.findViewById(R.id.document_list_details);
                 detailsTextView.setText(date);
