@@ -38,6 +38,9 @@ public class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base);
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().add(R.id.base_content, new MemosFragment());
+        transaction.commit();
+
         if (!PrefSettings.isLoggedIn(getApplicationContext())) {
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);

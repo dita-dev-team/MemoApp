@@ -2,6 +2,7 @@ package com.dita.dev.memoapp.ui.activity;
 
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class ComposeActivity extends AppCompatActivity {
     EditText Subject;
     @Bind(R.id.edtxtCompose)
     EditText Message;
+    private int REQUEST_CODE = 0;
 
 
     @Override
@@ -66,6 +68,8 @@ public class ComposeActivity extends AppCompatActivity {
                 // API 5+ solution
                 onBackPressed();
                 return true;
+            case R.id.action_flip:
+                openFile();
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -83,5 +87,25 @@ public class ComposeActivity extends AppCompatActivity {
         /*values.put(MemosColumns.DATE,Integer.valueOf(date.toString()));*/
         getContentResolver().insert(MemoContract.Memos.CONTENT_URI, values);
 
+    }
+
+    private void openFile() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            if (data != null) {
+                String Fpath = data.getDataString();
+                System.out.println(Fpath);
+            }
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
