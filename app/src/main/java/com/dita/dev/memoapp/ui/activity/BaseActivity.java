@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.dita.dev.memoapp.R;
@@ -34,6 +35,10 @@ public class BaseActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base);
+        String url = "http://dita.dev.com/";
+        WebView view = (WebView) this.findViewById(R.id.wb);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.loadUrl(url);
 
         if (!PrefSettings.isLoggedIn(getApplicationContext())) {
             Intent intent = new Intent(this, WelcomeActivity.class);
