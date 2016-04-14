@@ -43,11 +43,17 @@ public class MemosFragment extends Fragment implements LoaderManager.LoaderCallb
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memos, container, false);
         ButterKnife.bind(this, view);
-        getLoaderManager().initLoader(URL_LOADER, null, this);
+
         if (cAdapter == null) {
             memoList.setAdapter(cAdapter);
         }
+        getLoaderManager().initLoader(URL_LOADER, null, this);
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @OnClick(R.id.newMemo)
@@ -85,6 +91,16 @@ public class MemosFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        if (cAdapter != null) {
+            cAdapter.changeCursor(null);
+        }
+        cAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(0, null, this);
+//        cAdapter.notifyDataSetChanged();
     }
 }
